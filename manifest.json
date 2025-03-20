@@ -10,15 +10,15 @@
   },
   "action": {
   "default_icon": {
-    "16": "new.png",
-    "48": "new.png",
-    "128": "new.png"
+    "16": "notes.png",
+    "48": "notes.png",
+    "128": "notes.png"
   }
   },
   "icons": {
-    "16": "new.png",
-    "48": "new.png",
-    "128": "new.png"
+    "16": "notes.png",
+    "48": "notes.png",
+    "128": "notes.png"
   },
   "web_accessible_resources": [
     {
