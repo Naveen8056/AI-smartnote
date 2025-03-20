@@ -8,10 +8,17 @@
   "background": {
     "service_worker": "background.js"
   },
+  "action": {
+  "default_icon": {
+    "16": "new.png",
+    "48": "new.png",
+    "128": "new.png"
+  }
+  },
   "icons": {
-    "16": "notes.jpg",
-    "48": "notes.jpg",
-    "128": "notes.jpg"
+    "16": "new.png",
+    "48": "new.png",
+    "128": "new.png"
   },
   "web_accessible_resources": [
     {
