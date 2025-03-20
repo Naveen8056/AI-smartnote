@@ -10,20 +10,25 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Save notes with user-defined filename
+    // Save notes with user-defined filename and clear after saving
     saveNotes.addEventListener("click", function () {
         const fileName = prompt("Enter file name:", "Smart_Notes");
         if (fileName) {
             const textBlob = new Blob([noteContent.value], { type: "text/plain" });
             const url = URL.createObjectURL(textBlob);
+            
             chrome.downloads.download({ 
                 url: url, 
-                filename: fileName + ".txt"  // Append .txt to user-input filename
+                filename: fileName + ".txt" 
+            }, function () {
+                // Clear text area and stored notes after download
+                noteContent.value = "";
+                chrome.storage.local.set({ notes: "" });
             });
         }
     });
 
-    // Clear notes
+    // Clear notes manually
     clearNotes.addEventListener("click", function () {
         chrome.storage.local.set({ notes: "" }, function () {
             noteContent.value = "";
