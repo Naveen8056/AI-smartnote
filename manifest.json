@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "AI Smart Notes",
+  "version": "1.5",
+  "permissions": ["contextMenus", "storage", "downloads"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "notes.jpg",
+    "48": "notes.jpg",
+    "128": "notes.jpg"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["apikey.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
