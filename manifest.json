@@ -9,11 +9,11 @@
     "service_worker": "background.js"
   },
   "action": {
-  "default_icon": {
-    "16": "notes.png",
-    "48": "notes.png",
-    "128": "notes.png"
-  }
+    "default_icon": {
+      "16": "notes.png",
+      "48": "notes.png",
+      "128": "notes.png"
+    }
   },
   "icons": {
     "16": "notes.png",
@@ -22,7 +22,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["apikey.html"],
+      "resources": ["explanation.html", "notepad.html"],
       "matches": ["<all_urls>"]
     }
   ]
