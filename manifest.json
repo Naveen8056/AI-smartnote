@@ -2,6 +2,7 @@
   "manifest_version": 3,
   "name": "AI Smart Notes",
   "version": "1.5",
+  "description": "A Chrome extension that allows users to quickly take and download notes with AI-powered explanations in simple terms.",
   "permissions": ["contextMenus", "storage", "downloads"],
   "host_permissions": ["<all_urls>"],
   "background": {
