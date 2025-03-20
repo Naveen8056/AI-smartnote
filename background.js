@@ -1,3 +1,5 @@
+const API_KEY = "AIzaSyCVGW7AIwC5eYENp1-IP_RUU8j3lE8mMxc"; // Add your API key here
+
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
         id: "addText",
@@ -29,41 +31,29 @@ chrome.contextMenus.onClicked.addListener((info) => {
     }
 
     if (info.menuItemId === "explainText") {
-        chrome.storage.local.get("apiKey", function (data) {
-            if (!data.apiKey) {
+        fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: "Explain this briefly and simply: " + info.selectionText }] }]
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.candidates && data.candidates.length > 0) {
+                let explanation = data.candidates[0].content.parts[0].text;
+                chrome.storage.local.set({ explanation });
+
                 chrome.windows.create({
-                    url: chrome.runtime.getURL("apikey.html"),
+                    url: chrome.runtime.getURL("explanation.html"),
                     type: "popup",
-                    width: 400,
-                    height: 250
+                    width: 500,
+                    height: 400
                 });
-                return;
+            } else {
+                console.error("Failed to generate explanation.");
             }
-
-            fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${data.apiKey}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: "Explain this briefly and simply: " + info.selectionText }] }]
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data && data.candidates && data.candidates.length > 0) {
-                    let explanation = data.candidates[0].content.parts[0].text;
-                    chrome.storage.local.set({ explanation });
-
-                    chrome.windows.create({
-                        url: chrome.runtime.getURL("explanation.html"),
-                        type: "popup",
-                        width: 500,
-                        height: 400
-                    });
-                } else {
-                    console.error("Failed to generate explanation.");
-                }
-            })
-            .catch(() => console.error("Error in generating explanation!"));
-        });
+        })
+        .catch(() => console.error("Error in generating explanation!"));
     }
 });
