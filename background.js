@@ -1,4 +1,5 @@
-const API_KEY = "AIzaSyCVGW7AIwC5eYENp1-IP_RUU8j3lE8mMxc"; // Add your API key here
+// Load the configuration file
+importScripts('config.js');
 
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
@@ -31,7 +32,7 @@ chrome.contextMenus.onClicked.addListener((info) => {
     }
 
     if (info.menuItemId === "explainText") {
-        fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`, {
+        fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${CONFIG.API_KEY}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

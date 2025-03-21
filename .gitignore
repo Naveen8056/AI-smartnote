@@ -1,0 +1,9 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore config.js file
+config.js
+
+# Ignore other files or directories as needed
+.DS_Store
+dist/
